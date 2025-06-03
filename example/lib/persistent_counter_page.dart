@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:event_scheduler/event_scheduler_flutter.dart';
+import 'package:event_scheduler/event_scheduler.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

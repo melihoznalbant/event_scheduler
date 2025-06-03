@@ -1,7 +1,15 @@
 # Changelog
 
-## 1.0.0
+## [0.0.1] - 2025-06-03
 
+* Initial release of the Event Scheduler package.
+* Core components introduced:
+  * Scheduler builder
+  * Scheduler configuration
+  * Scheduler execution logic
+* Added first example application.
+* Added initial unit tests.
+* Included pubspec, README, and license files.
 * Initial release of Event Scheduler package
 * Features:
   * Time-based event triggers

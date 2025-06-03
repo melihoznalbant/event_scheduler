@@ -1,7 +1,7 @@
 name: event_scheduler
 description: "A new Flutter package project."
 version: 0.0.1
-homepage:
+homepage: https://github.com/melihoznalbant/event_scheduler
 
 environment:
   sdk: ^3.7.2

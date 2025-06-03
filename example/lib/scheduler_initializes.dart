@@ -1,4 +1,4 @@
-import 'package:event_scheduler/event_scheduler_flutter.dart';
+import 'package:event_scheduler/event_scheduler.dart';
 
 class SchedulerInitializer {
   static void initializeSchedulerEightPage({
