@@ -1,6 +1,6 @@
 name: event_scheduler
 description: "description: A cross-platform event scheduling package for Flutter with support for time-based, count-based, and recurring triggers."
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/melihoznalbant/event_scheduler
 
 environment:

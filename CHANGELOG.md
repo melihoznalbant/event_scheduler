@@ -28,3 +28,7 @@
 ## [0.0.2] - 2025-06-10
 
 * library-level doc comment is now valid
+
+## [0.0.3] - 2025-06-10
+
+* Some updates
