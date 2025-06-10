@@ -25,32 +25,40 @@ void main() {
       expect(await eventCounter.getCounter(testEventKey), 2);
     });
 
-    test('setLastTriggerTime and getLastTriggerTime should work correctly', () async {
-      final now = DateTime.now();
-      
-      // Initially should be null
-      expect(await eventCounter.getLastTriggerTime(testEventKey), null);
+    test(
+      'setLastTriggerTime and getLastTriggerTime should work correctly',
+      () async {
+        final now = DateTime.now();
 
-      // Set trigger time
-      await eventCounter.setLastTriggerTime(testEventKey, now);
-      final retrievedTime = await eventCounter.getLastTriggerTime(testEventKey);
-      
-      expect(retrievedTime, isNotNull);
-      expect(retrievedTime!.toIso8601String(), now.toIso8601String());
-    });
+        // Initially should be null
+        expect(await eventCounter.getLastTriggerTime(testEventKey), null);
 
-    test('incrementRecurrenceCounter should increase recurrence count by 1', () async {
-      // Initial recurrence count should be 0
-      expect(await eventCounter.getRecurrenceCounter(testEventKey), 0);
+        // Set trigger time
+        await eventCounter.setLastTriggerTime(testEventKey, now);
+        final retrievedTime = await eventCounter.getLastTriggerTime(
+          testEventKey,
+        );
 
-      // Increment recurrence counter
-      await eventCounter.incrementRecurrenceCounter(testEventKey);
-      expect(await eventCounter.getRecurrenceCounter(testEventKey), 1);
+        expect(retrievedTime, isNotNull);
+        expect(retrievedTime!.toIso8601String(), now.toIso8601String());
+      },
+    );
 
-      // Increment again
-      await eventCounter.incrementRecurrenceCounter(testEventKey);
-      expect(await eventCounter.getRecurrenceCounter(testEventKey), 2);
-    });
+    test(
+      'incrementRecurrenceCounter should increase recurrence count by 1',
+      () async {
+        // Initial recurrence count should be 0
+        expect(await eventCounter.getRecurrenceCounter(testEventKey), 0);
+
+        // Increment recurrence counter
+        await eventCounter.incrementRecurrenceCounter(testEventKey);
+        expect(await eventCounter.getRecurrenceCounter(testEventKey), 1);
+
+        // Increment again
+        await eventCounter.incrementRecurrenceCounter(testEventKey);
+        expect(await eventCounter.getRecurrenceCounter(testEventKey), 2);
+      },
+    );
 
     test('setFirstOpenTime should only set time if not already set', () async {
       final firstTime = DateTime.now();

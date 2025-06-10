@@ -34,7 +34,6 @@ class _ModularSchedulerPageState extends State<ModularSchedulerPage> {
   }
 
   void _showNotification(String message) {
-    
     showDialog(
       context: context,
       barrierDismissible: true,
@@ -106,4 +105,4 @@ class _ModularSchedulerPageState extends State<ModularSchedulerPage> {
       ),
     );
   }
-} 
+}

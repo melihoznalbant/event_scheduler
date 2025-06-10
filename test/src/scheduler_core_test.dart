@@ -16,7 +16,7 @@ void main() {
     setUp(() async {
       SharedPreferences.setMockInitialValues({});
       await SharedPreferences.getInstance();
-      
+
       eventCompleter = Completer<void>();
       recurrenceCompleter = Completer<void>();
       stateUpdateCompleter = Completer<void>();
@@ -136,7 +136,7 @@ void main() {
     test('should get last trigger time', () async {
       final now = DateTime.now();
       final eventCompleter = Completer<void>();
-      
+
       final config = SchedulerConfig(
         eventKey: testEventKey,
         triggerType: TriggerType.time,
@@ -149,7 +149,9 @@ void main() {
 
       SchedulerCore.register(config);
       await eventCompleter.future;
-      final lastTriggerTime = await SchedulerCore.getLastTriggerTime(testEventKey);
+      final lastTriggerTime = await SchedulerCore.getLastTriggerTime(
+        testEventKey,
+      );
       expect(lastTriggerTime, isNotNull);
       expect(lastTriggerTime!.isAfter(now), true);
     });
@@ -171,7 +173,7 @@ void main() {
 
       SchedulerCore.register(config);
       await SchedulerCore.reset(testEventKey);
-      
+
       try {
         await stateUpdateCompleter.future.timeout(
           const Duration(seconds: 5),

@@ -11,13 +11,12 @@ class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
   final String title;
-  
+
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   void _navigateToSecondPage() {
     Navigator.push(
       context,
@@ -103,12 +102,16 @@ class _MyHomePageState extends State<MyHomePage> {
                         const SizedBox(height: 10),
                         ElevatedButton(
                           onPressed: _navigateToThirdPage,
-                          child: const Text('Time-based Scheduler (30s interval)'),
+                          child: const Text(
+                            'Time-based Scheduler (30s interval)',
+                          ),
                         ),
                         const SizedBox(height: 10),
                         ElevatedButton(
                           onPressed: _navigateToFourthPage,
-                          child: const Text('Persistent Counter (+5, +2 every 30s)'),
+                          child: const Text(
+                            'Persistent Counter (+5, +2 every 30s)',
+                          ),
                         ),
                         const SizedBox(height: 10),
                         ElevatedButton(
@@ -118,12 +121,16 @@ class _MyHomePageState extends State<MyHomePage> {
                         const SizedBox(height: 10),
                         ElevatedButton(
                           onPressed: _navigateToSixthPage,
-                          child: const Text('Click-based Scheduler (5 clicks, 5 triggers)'),
+                          child: const Text(
+                            'Click-based Scheduler (5 clicks, 5 triggers)',
+                          ),
                         ),
                         const SizedBox(height: 10),
                         ElevatedButton(
                           onPressed: _navigateToSeventhPage,
-                          child: const Text('Hybrid Scheduler (5 clicks, 1 min)'),
+                          child: const Text(
+                            'Hybrid Scheduler (5 clicks, 1 min)',
+                          ),
                         ),
                         const SizedBox(height: 10),
                         ElevatedButton(

@@ -30,20 +30,20 @@ class _PageOpenCounterPageState extends State<PageOpenCounterPage> {
   }
 
   void _showLikeDialog() {
-    
     WidgetsBinding.instance.addPostFrameCallback((_) {
       showDialog(
         context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('Information'),
-          content: const Text('Do you like this page?'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text('OK'),
+        builder:
+            (context) => AlertDialog(
+              title: const Text('Information'),
+              content: const Text('Do you like this page?'),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: const Text('OK'),
+                ),
+              ],
             ),
-          ],
-        ),
       );
     });
   }
@@ -109,7 +109,7 @@ bool _isSchedulerRegistered = false;
 
 void setupSecondPageCallback(void Function() showDialog) {
   _showDialogCallback = showDialog;
-  
+
   if (!_isSchedulerRegistered) {
     SchedulerCore.register(
       SchedulerConfig(
@@ -127,4 +127,3 @@ void setupSecondPageCallback(void Function() showDialog) {
     _isSchedulerRegistered = true;
   }
 }
- 

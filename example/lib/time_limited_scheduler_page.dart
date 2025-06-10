@@ -5,7 +5,8 @@ class TimeLimitedSchedulerPage extends StatefulWidget {
   const TimeLimitedSchedulerPage({super.key});
 
   @override
-  State<TimeLimitedSchedulerPage> createState() => _TimeLimitedSchedulerPageState();
+  State<TimeLimitedSchedulerPage> createState() =>
+      _TimeLimitedSchedulerPageState();
 }
 
 class _TimeLimitedSchedulerPageState extends State<TimeLimitedSchedulerPage> {
@@ -54,7 +55,6 @@ class _TimeLimitedSchedulerPageState extends State<TimeLimitedSchedulerPage> {
   }
 
   void _showNotification(String message) {
-    
     showDialog(
       context: context,
       barrierDismissible: true,
@@ -127,4 +127,4 @@ class _TimeLimitedSchedulerPageState extends State<TimeLimitedSchedulerPage> {
       ),
     );
   }
-} 
+}

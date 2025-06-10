@@ -5,7 +5,8 @@ class ClickBasedSchedulerPage extends StatefulWidget {
   const ClickBasedSchedulerPage({super.key});
 
   @override
-  State<ClickBasedSchedulerPage> createState() => _ClickBasedSchedulerPageState();
+  State<ClickBasedSchedulerPage> createState() =>
+      _ClickBasedSchedulerPageState();
 }
 
 class _ClickBasedSchedulerPageState extends State<ClickBasedSchedulerPage> {
@@ -23,14 +24,13 @@ class _ClickBasedSchedulerPageState extends State<ClickBasedSchedulerPage> {
   }
 
   void _initializeScheduler() async {
-    
     final config = SchedulerConfig(
       eventKey: _eventKey,
       triggerType: TriggerType.count,
-      triggerCount: 5, 
+      triggerCount: 5,
       recurrenceType: RecurrenceType.count,
-      recurrenceCount: 2,  
-      maxRecurrences: 4, 
+      recurrenceCount: 2,
+      maxRecurrences: 4,
       onEvent: () {
         _triggerCount++;
         setState(() {
@@ -63,7 +63,6 @@ class _ClickBasedSchedulerPageState extends State<ClickBasedSchedulerPage> {
   }
 
   void _showNotification(String message) {
-    
     showDialog(
       context: context,
       barrierDismissible: true,
@@ -152,4 +151,4 @@ class _ClickBasedSchedulerPageState extends State<ClickBasedSchedulerPage> {
       ),
     );
   }
-} 
+}

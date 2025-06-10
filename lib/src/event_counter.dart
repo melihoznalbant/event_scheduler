@@ -1,13 +1,13 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// A singleton class that manages event counting and timing using SharedPreferences.
-/// 
+///
 /// This class provides methods to track:
 /// * Event occurrence counts
 /// * Last trigger times
 /// * Recurrence counts
 /// * First open times
-/// 
+///
 /// All data is persisted using SharedPreferences for app restarts.
 class EventCounter {
   static final EventCounter _instance = EventCounter._internal();
@@ -20,7 +20,7 @@ class EventCounter {
   static const String _firstOpenPrefix = 'first_open_';
 
   /// Increments the counter for a specific event.
-  /// 
+  ///
   /// This method increases the count of occurrences for the given event.
   /// The count is persisted and can be retrieved later.
   Future<void> incrementCounter(String eventKey) async {
@@ -31,7 +31,7 @@ class EventCounter {
   }
 
   /// Gets the current count for a specific event.
-  /// 
+  ///
   /// Returns the number of times the event has occurred.
   /// Returns 0 if the event has never occurred.
   Future<int> getCounter(String eventKey) async {
@@ -41,7 +41,7 @@ class EventCounter {
   }
 
   /// Sets the last trigger time for an event.
-  /// 
+  ///
   /// This method stores the time when an event was last triggered.
   /// The time is stored in ISO 8601 format.
   Future<void> setLastTriggerTime(String eventKey, DateTime time) async {
@@ -51,7 +51,7 @@ class EventCounter {
   }
 
   /// Gets the last trigger time for an event.
-  /// 
+  ///
   /// Returns the DateTime when the event was last triggered.
   /// Returns null if the event has never been triggered.
   Future<DateTime?> getLastTriggerTime(String eventKey) async {
@@ -63,7 +63,7 @@ class EventCounter {
   }
 
   /// Increments the recurrence counter for an event.
-  /// 
+  ///
   /// This method increases the count of recurrences for the given event.
   /// The count is persisted and can be retrieved later.
   Future<void> incrementRecurrenceCounter(String eventKey) async {
@@ -74,7 +74,7 @@ class EventCounter {
   }
 
   /// Gets the current recurrence count for an event.
-  /// 
+  ///
   /// Returns the number of times the event has recurred.
   /// Returns 0 if the event has never recurred.
   Future<int> getRecurrenceCounter(String eventKey) async {
@@ -84,7 +84,7 @@ class EventCounter {
   }
 
   /// Sets the first open time for an event.
-  /// 
+  ///
   /// This method stores the time when an event was first opened.
   /// The time is only stored if it hasn't been set before.
   /// The time is stored in ISO 8601 format.
@@ -97,7 +97,7 @@ class EventCounter {
   }
 
   /// Gets the first open time for an event.
-  /// 
+  ///
   /// Returns the DateTime when the event was first opened.
   /// Returns null if the event has never been opened.
   Future<DateTime?> getFirstOpenTime(String eventKey) async {
@@ -109,7 +109,7 @@ class EventCounter {
   }
 
   /// Resets all tracking data for an event.
-  /// 
+  ///
   /// This method clears all stored data for the given event, including:
   /// * Event counter
   /// * Last trigger time
@@ -122,4 +122,4 @@ class EventCounter {
     await prefs.remove(_recurrencePrefix + eventKey);
     await prefs.remove(_firstOpenPrefix + eventKey);
   }
-} 
+}

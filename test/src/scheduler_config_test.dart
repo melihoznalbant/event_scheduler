@@ -37,27 +37,33 @@ void main() {
       expect(config.onEvent, testOnEvent);
     });
 
-    test('should throw assertion error when time trigger is missing triggerTime', () {
-      expect(
-        () => SchedulerConfig(
-          eventKey: testEventKey,
-          triggerType: TriggerType.time,
-          onEvent: testOnEvent,
-        ),
-        throwsAssertionError,
-      );
-    });
+    test(
+      'should throw assertion error when time trigger is missing triggerTime',
+      () {
+        expect(
+          () => SchedulerConfig(
+            eventKey: testEventKey,
+            triggerType: TriggerType.time,
+            onEvent: testOnEvent,
+          ),
+          throwsAssertionError,
+        );
+      },
+    );
 
-    test('should throw assertion error when count trigger is missing triggerCount', () {
-      expect(
-        () => SchedulerConfig(
-          eventKey: testEventKey,
-          triggerType: TriggerType.count,
-          onEvent: testOnEvent,
-        ),
-        throwsAssertionError,
-      );
-    });
+    test(
+      'should throw assertion error when count trigger is missing triggerCount',
+      () {
+        expect(
+          () => SchedulerConfig(
+            eventKey: testEventKey,
+            triggerType: TriggerType.count,
+            onEvent: testOnEvent,
+          ),
+          throwsAssertionError,
+        );
+      },
+    );
 
     test('should create valid config with count recurrence', () {
       final config = SchedulerConfig(
@@ -88,32 +94,38 @@ void main() {
       expect(config.recurrenceInterval, const Duration(minutes: 5));
     });
 
-    test('should throw assertion error when count recurrence is missing recurrenceCount', () {
-      expect(
-        () => SchedulerConfig(
-          eventKey: testEventKey,
-          triggerType: TriggerType.time,
-          triggerTime: DateTime.now(),
-          recurrenceType: RecurrenceType.count,
-          recurrenceInterval: const Duration(minutes: 5),
-          onEvent: testOnEvent,
-        ),
-        throwsAssertionError,
-      );
-    });
+    test(
+      'should throw assertion error when count recurrence is missing recurrenceCount',
+      () {
+        expect(
+          () => SchedulerConfig(
+            eventKey: testEventKey,
+            triggerType: TriggerType.time,
+            triggerTime: DateTime.now(),
+            recurrenceType: RecurrenceType.count,
+            recurrenceInterval: const Duration(minutes: 5),
+            onEvent: testOnEvent,
+          ),
+          throwsAssertionError,
+        );
+      },
+    );
 
-    test('should throw assertion error when time recurrence is missing recurrenceInterval', () {
-      expect(
-        () => SchedulerConfig(
-          eventKey: testEventKey,
-          triggerType: TriggerType.time,
-          triggerTime: DateTime.now(),
-          recurrenceType: RecurrenceType.time,
-          onEvent: testOnEvent,
-        ),
-        throwsAssertionError,
-      );
-    });
+    test(
+      'should throw assertion error when time recurrence is missing recurrenceInterval',
+      () {
+        expect(
+          () => SchedulerConfig(
+            eventKey: testEventKey,
+            triggerType: TriggerType.time,
+            triggerTime: DateTime.now(),
+            recurrenceType: RecurrenceType.time,
+            onEvent: testOnEvent,
+          ),
+          throwsAssertionError,
+        );
+      },
+    );
 
     test('should create valid config with optional callbacks', () {
       testRecurrenceOnEvent() {}

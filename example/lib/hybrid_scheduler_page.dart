@@ -23,13 +23,12 @@ class _HybridSchedulerPageState extends State<HybridSchedulerPage> {
   }
 
   void _initializeScheduler() async {
-    
     final config = SchedulerConfig(
       eventKey: _eventKey,
       triggerType: TriggerType.count,
-      triggerCount: 5, 
+      triggerCount: 5,
       recurrenceType: RecurrenceType.count,
-      recurrenceCount: 2, 
+      recurrenceCount: 2,
       endTime: DateTime.now().add(const Duration(minutes: 1)),
       onEvent: () {
         _triggerCount++;
@@ -63,7 +62,6 @@ class _HybridSchedulerPageState extends State<HybridSchedulerPage> {
   }
 
   void _showNotification(String message) {
-    
     showDialog(
       context: context,
       barrierDismissible: true,
@@ -152,4 +150,4 @@ class _HybridSchedulerPageState extends State<HybridSchedulerPage> {
       ),
     );
   }
-} 
+}

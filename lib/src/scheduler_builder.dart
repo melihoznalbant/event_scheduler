@@ -3,10 +3,10 @@ import 'scheduler_config.dart';
 import 'scheduler_core.dart';
 
 /// A builder class for creating and configuring event schedulers.
-/// 
+///
 /// This class provides a fluent interface for configuring events using the builder pattern.
 /// It allows for easy and readable configuration of all event parameters.
-/// 
+///
 /// Example usage:
 /// ```dart
 /// EventSchedulerBuilder()
@@ -28,13 +28,13 @@ class EventSchedulerBuilder {
 
   /// Type of recurrence (none, time, or count)
   RecurrenceType _recurrenceType = RecurrenceType.none;
-  
+
   /// Time when time-based triggers should occur
   DateTime? _triggerTime;
 
   /// Count required for count-based triggers
   int? _triggerCount;
-  
+
   /// Interval between recurring events
   Duration? _recurrenceInterval;
 
@@ -46,7 +46,7 @@ class EventSchedulerBuilder {
 
   /// When the event should stop recurring
   DateTime? _endTime;
-  
+
   /// Callback function when the event is triggered
   VoidCallback? _onEvent;
 
@@ -57,7 +57,7 @@ class EventSchedulerBuilder {
   Function(bool)? _onStateUpdate;
 
   /// Sets the unique identifier for the event.
-  /// 
+  ///
   /// This is a required parameter and must be set before building.
   EventSchedulerBuilder setEventKey(String key) {
     _eventKey = key;
@@ -65,7 +65,7 @@ class EventSchedulerBuilder {
   }
 
   /// Sets the type of trigger for the event.
-  /// 
+  ///
   /// This is a required parameter and must be set before building.
   /// * [TriggerType.time] for time-based triggers
   /// * [TriggerType.count] for count-based triggers
@@ -75,7 +75,7 @@ class EventSchedulerBuilder {
   }
 
   /// Sets the type of recurrence for the event.
-  /// 
+  ///
   /// * [RecurrenceType.none] for no recurrence
   /// * [RecurrenceType.time] for time-based recurrence
   /// * [RecurrenceType.count] for count-based recurrence
@@ -85,7 +85,7 @@ class EventSchedulerBuilder {
   }
 
   /// Sets the trigger time for time-based triggers.
-  /// 
+  ///
   /// Required when [triggerType] is [TriggerType.time].
   /// Specifies when the event should first trigger.
   EventSchedulerBuilder setTriggerTime(DateTime time) {
@@ -94,7 +94,7 @@ class EventSchedulerBuilder {
   }
 
   /// Sets the trigger count for count-based triggers.
-  /// 
+  ///
   /// Required when [triggerType] is [TriggerType.count].
   /// Specifies how many occurrences are needed to trigger the event.
   EventSchedulerBuilder setTriggerCount(int count) {
@@ -103,7 +103,7 @@ class EventSchedulerBuilder {
   }
 
   /// Sets the interval between recurring events.
-  /// 
+  ///
   /// Required when [recurrenceType] is [RecurrenceType.time].
   /// Specifies how often the event should recur.
   EventSchedulerBuilder setRecurrenceInterval(Duration interval) {
@@ -112,7 +112,7 @@ class EventSchedulerBuilder {
   }
 
   /// Sets the number of times an event should recur.
-  /// 
+  ///
   /// Required when [recurrenceType] is [RecurrenceType.count].
   /// Specifies how many times the event should recur.
   EventSchedulerBuilder setRecurrenceCount(int count) {
@@ -121,7 +121,7 @@ class EventSchedulerBuilder {
   }
 
   /// Sets the maximum number of times an event can recur.
-  /// 
+  ///
   /// Optional parameter that limits the total number of recurrences.
   /// If not set, the event can recur indefinitely (until [endTime] if set).
   EventSchedulerBuilder setMaxRecurrences(int count) {
@@ -130,7 +130,7 @@ class EventSchedulerBuilder {
   }
 
   /// Sets when the event should stop recurring.
-  /// 
+  ///
   /// Optional parameter that specifies when the event should stop recurring.
   /// If not set, the event will continue until [maxRecurrences] if set.
   EventSchedulerBuilder setEndTime(DateTime time) {
@@ -139,7 +139,7 @@ class EventSchedulerBuilder {
   }
 
   /// Sets the callback function for when the event is triggered.
-  /// 
+  ///
   /// This is a required parameter and must be set before building.
   /// The callback will be called when the event triggers.
   EventSchedulerBuilder setOnEvent(VoidCallback callback) {
@@ -148,7 +148,7 @@ class EventSchedulerBuilder {
   }
 
   /// Sets the callback function for recurrence events.
-  /// 
+  ///
   /// Optional parameter that specifies a different callback for recurrence events.
   /// If not set, the main [onEvent] callback will be used for recurrences.
   EventSchedulerBuilder setRecurrenceOnEvent(VoidCallback callback) {
@@ -157,7 +157,7 @@ class EventSchedulerBuilder {
   }
 
   /// Sets the callback function for state updates.
-  /// 
+  ///
   /// Optional parameter that will be called when the event's state changes.
   /// The callback receives a boolean indicating if the event is active.
   EventSchedulerBuilder setOnStateUpdate(Function(bool) callback) {
@@ -166,15 +166,15 @@ class EventSchedulerBuilder {
   }
 
   /// Builds and registers the event configuration.
-  /// 
+  ///
   /// This method validates the configuration and registers the event
   /// with the scheduler core.
-  /// 
+  ///
   /// Throws an exception if required parameters are missing:
   /// * [eventKey]
   /// * [triggerType]
   /// * [onEvent]
-  /// 
+  ///
   /// Also throws if required parameters for the selected trigger type
   /// or recurrence type are missing.
   void build() {

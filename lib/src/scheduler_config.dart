@@ -1,35 +1,28 @@
 import 'package:flutter/foundation.dart';
 
 /// Defines the type of trigger for an event.
-/// 
+///
 /// * [count] - Event triggers after a specific number of occurrences
 /// * [time] - Event triggers at a specific time or interval
-enum TriggerType {
-  count,
-  time,
-}
+enum TriggerType { count, time }
 
 /// Defines how an event should recur.
-/// 
+///
 /// * [none] - Event does not recur
 /// * [count] - Event recurs after a specific number of occurrences
 /// * [time] - Event recurs at specific time intervals
-enum RecurrenceType {
-  none,
-  count,
-  time,
-}
+enum RecurrenceType { none, count, time }
 
 /// Configuration class for event scheduling.
-/// 
+///
 /// This class defines how an event should be triggered and handled.
 /// It supports both time-based and count-based triggers with optional recurrence.
-/// 
+///
 /// Required parameters:
 /// * [eventKey] - Unique identifier for the event
 /// * [triggerType] - Type of trigger (time or count)
 /// * [onEvent] - Callback function when event is triggered
-/// 
+///
 /// Optional parameters:
 /// * [triggerTime] - Required for time-based triggers
 /// * [triggerCount] - Required for count-based triggers
@@ -78,7 +71,7 @@ class SchedulerConfig {
   final Function(bool)? onStateUpdate;
 
   /// Creates a new scheduler configuration.
-  /// 
+  ///
   /// Throws assertions if required parameters are missing based on trigger type:
   /// * For count triggers: triggerCount must be provided
   /// * For time triggers: triggerTime must be provided
@@ -99,7 +92,9 @@ class SchedulerConfig {
     this.onStateUpdate,
   }) {
     assert(
-      triggerType == TriggerType.count ? triggerCount != null : triggerTime != null,
+      triggerType == TriggerType.count
+          ? triggerCount != null
+          : triggerTime != null,
       'triggerCount must be provided when triggerType is count, triggerTime must be provided when triggerType is time',
     );
 

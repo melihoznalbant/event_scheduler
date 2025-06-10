@@ -3,11 +3,11 @@ import 'event_counter.dart';
 import 'dart:async';
 
 /// Core class that manages event scheduling and triggering.
-/// 
+///
 /// This class provides static methods to register, track, and manage events.
 /// It handles all the scheduling logic and ensures events are triggered
 /// according to their configuration.
-/// 
+///
 /// The class maintains several internal maps to track:
 /// * Event configurations
 /// * Active timers
@@ -21,23 +21,23 @@ class SchedulerCore {
   static final Map<String, Timer> _timeUpdateTimers = {};
 
   /// Registers a new event configuration.
-  /// 
+  ///
   /// This method sets up the event with the provided configuration and
   /// starts tracking it according to its trigger type.
-  /// 
+  ///
   /// For time-based triggers, it will start the time tracking immediately.
-  /// 
+  ///
   /// Throws an exception if the configuration is invalid.
   static void register(SchedulerConfig config) {
     _configs[config.eventKey] = config;
-    
+
     if (config.triggerType == TriggerType.time) {
       _startTimeTracking(config);
     }
   }
 
   /// Unregisters an event and cleans up its resources.
-  /// 
+  ///
   /// This method should be called when you no longer need to track an event.
   /// It cancels any active timers and removes the event from tracking.
   static void unregister(String eventKey) {
@@ -50,12 +50,14 @@ class SchedulerCore {
   }
 
   /// Starts tracking time-based events.
-  /// 
+  ///
   /// This method handles the initial setup for time-based triggers,
   /// including first open time tracking and recurring timer setup.
   static void _startTimeTracking(SchedulerConfig config) async {
     final firstOpenTime = await _eventCounter.getFirstOpenTime(config.eventKey);
-    final lastTriggerTime = await _eventCounter.getLastTriggerTime(config.eventKey);
+    final lastTriggerTime = await _eventCounter.getLastTriggerTime(
+      config.eventKey,
+    );
     final now = DateTime.now();
 
     if (firstOpenTime == null) {
@@ -69,13 +71,13 @@ class SchedulerCore {
       _startRecurringTimer(config);
     } else {
       final timeSinceLastTrigger = now.difference(lastTriggerTime);
-      
+
       if (timeSinceLastTrigger >= config.recurrenceInterval!) {
         _triggerEvent(config, isRecurrence: true);
         _startRecurringTimer(config);
       } else {
         final remainingTime = config.recurrenceInterval! - timeSinceLastTrigger;
-        
+
         Timer(remainingTime, () {
           if (_configs.containsKey(config.eventKey)) {
             _triggerEvent(config, isRecurrence: true);
@@ -87,12 +89,14 @@ class SchedulerCore {
   }
 
   /// Starts a recurring timer for time-based events.
-  /// 
+  ///
   /// This method sets up a periodic timer that triggers the event
   /// at the specified interval.
   static void _startRecurringTimer(SchedulerConfig config) {
     _timers[config.eventKey]?.cancel();
-    _timers[config.eventKey] = Timer.periodic(config.recurrenceInterval!, (timer) {
+    _timers[config.eventKey] = Timer.periodic(config.recurrenceInterval!, (
+      timer,
+    ) {
       if (_configs.containsKey(config.eventKey)) {
         if (config.endTime != null && DateTime.now().isAfter(config.endTime!)) {
           timer.cancel();
@@ -107,19 +111,22 @@ class SchedulerCore {
   }
 
   /// Triggers an event and updates its state.
-  /// 
+  ///
   /// This method handles the actual event triggering, including:
   /// * Calling the appropriate callback
   /// * Updating last trigger time
   /// * Incrementing recurrence counter
   /// * Updating state
-  static void _triggerEvent(SchedulerConfig config, {required bool isRecurrence}) {
+  static void _triggerEvent(
+    SchedulerConfig config, {
+    required bool isRecurrence,
+  }) {
     if (isRecurrence && config.recurrenceType != RecurrenceType.none) {
       (config.recurrenceOnEvent ?? config.onEvent)();
     } else {
       config.onEvent();
     }
-    
+
     _lastTriggerTimes[config.eventKey] = DateTime.now();
     _eventCounter.setLastTriggerTime(config.eventKey, DateTime.now());
     _eventCounter.incrementRecurrenceCounter(config.eventKey);
@@ -127,16 +134,16 @@ class SchedulerCore {
   }
 
   /// Tracks an event occurrence.
-  /// 
+  ///
   /// For count-based triggers, this method should be called each time
   /// the event occurs. It will trigger the event when the count reaches
   /// the configured threshold.
-  /// 
+  ///
   /// This method also handles:
   /// * End time checks
   /// * Maximum recurrence checks
   /// * Count-based recurrence
-  /// 
+  ///
   /// Returns a Future that completes when the tracking is done.
   static Future<void> track(String eventKey) async {
     final config = _configs[eventKey];
@@ -151,28 +158,29 @@ class SchedulerCore {
     final count = await _eventCounter.getCounter(eventKey);
     final recurrenceCount = await _eventCounter.getRecurrenceCounter(eventKey);
 
-    if (config.maxRecurrences != null && recurrenceCount >= config.maxRecurrences! + 1) {
+    if (config.maxRecurrences != null &&
+        recurrenceCount >= config.maxRecurrences! + 1) {
       config.onStateUpdate?.call(false);
       return;
     }
 
-    if (config.triggerType == TriggerType.count && 
-        count >= config.triggerCount! && 
+    if (config.triggerType == TriggerType.count &&
+        count >= config.triggerCount! &&
         recurrenceCount == 0) {
       _triggerEvent(config, isRecurrence: false);
       return;
     }
 
-    if (config.triggerType == TriggerType.time && 
-        DateTime.now().isAfter(config.triggerTime!) && 
+    if (config.triggerType == TriggerType.time &&
+        DateTime.now().isAfter(config.triggerTime!) &&
         recurrenceCount == 0) {
       _triggerEvent(config, isRecurrence: false);
       return;
     }
 
-    if (config.recurrenceType == RecurrenceType.count && 
-        recurrenceCount > 0) {
-      if (config.maxRecurrences != null && recurrenceCount >= config.maxRecurrences! + 1) {
+    if (config.recurrenceType == RecurrenceType.count && recurrenceCount > 0) {
+      if (config.maxRecurrences != null &&
+          recurrenceCount >= config.maxRecurrences! + 1) {
         config.onStateUpdate?.call(false);
         return;
       }
@@ -185,7 +193,7 @@ class SchedulerCore {
   }
 
   /// Gets the last time an event was triggered.
-  /// 
+  ///
   /// Returns a Future that completes with the DateTime of the last trigger,
   /// or null if the event has never been triggered.
   static Future<DateTime?> getLastTriggerTime(String eventKey) async {
@@ -193,16 +201,16 @@ class SchedulerCore {
   }
 
   /// Resets an event's state.
-  /// 
+  ///
   /// This method clears all tracking data for the event and cancels
   /// any active timers. The event will start fresh the next time it's tracked.
-  /// 
+  ///
   /// It handles:
   /// * Resetting event counter
   /// * Canceling active timers
   /// * Clearing last trigger times
   /// * Updating state
-  /// 
+  ///
   /// Returns a Future that completes when the reset is done.
   static Future<void> reset(String eventKey) async {
     await _eventCounter.resetEvent(eventKey);

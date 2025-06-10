@@ -50,7 +50,6 @@ class _TimeBasedSchedulerPageState extends State<TimeBasedSchedulerPage> {
   }
 
   void _showNotification(String message) {
-    
     showDialog(
       context: context,
       barrierDismissible: true,

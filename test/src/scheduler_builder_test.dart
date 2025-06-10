@@ -17,18 +17,12 @@ void main() {
     });
 
     test('Builder should throw exception when required fields are missing', () {
-      expect(
-        () => builder.build(),
-        throwsException,
-      );
+      expect(() => builder.build(), throwsException);
     });
 
     test('Builder should set event key correctly', () {
       builder.setEventKey(testEventKey);
-      expect(
-        () => builder.build(),
-        throwsException,
-      );
+      expect(() => builder.build(), throwsException);
     });
 
     test('Builder should set trigger type correctly', () {
@@ -37,10 +31,7 @@ void main() {
         ..setTriggerType(TriggerType.time)
         ..setOnEvent(() {});
 
-      expect(
-        () => builder.build(),
-        isNot(throwsException),
-      );
+      expect(() => builder.build(), isNot(throwsException));
     });
 
     test('Builder should set recurrence type correctly', () {
@@ -50,10 +41,7 @@ void main() {
         ..setRecurrenceType(RecurrenceType.time)
         ..setOnEvent(() {});
 
-      expect(
-        () => builder.build(),
-        isNot(throwsException),
-      );
+      expect(() => builder.build(), isNot(throwsException));
     });
 
     test('Builder should set trigger time correctly', () {
@@ -64,10 +52,7 @@ void main() {
         ..setTriggerTime(now)
         ..setOnEvent(() {});
 
-      expect(
-        () => builder.build(),
-        isNot(throwsException),
-      );
+      expect(() => builder.build(), isNot(throwsException));
     });
 
     test('Builder should set trigger count correctly', () {
@@ -77,10 +62,7 @@ void main() {
         ..setTriggerCount(5)
         ..setOnEvent(() {});
 
-      expect(
-        () => builder.build(),
-        isNot(throwsException),
-      );
+      expect(() => builder.build(), isNot(throwsException));
     });
 
     test('Builder should set recurrence interval correctly', () {
@@ -91,10 +73,7 @@ void main() {
         ..setRecurrenceInterval(const Duration(minutes: 5))
         ..setOnEvent(() {});
 
-      expect(
-        () => builder.build(),
-        isNot(throwsException),
-      );
+      expect(() => builder.build(), isNot(throwsException));
     });
 
     test('Builder should set recurrence count correctly', () {
@@ -105,10 +84,7 @@ void main() {
         ..setRecurrenceCount(3)
         ..setOnEvent(() {});
 
-      expect(
-        () => builder.build(),
-        isNot(throwsException),
-      );
+      expect(() => builder.build(), isNot(throwsException));
     });
 
     test('Builder should set max recurrences correctly', () {
@@ -119,10 +95,7 @@ void main() {
         ..setMaxRecurrences(5)
         ..setOnEvent(() {});
 
-      expect(
-        () => builder.build(),
-        isNot(throwsException),
-      );
+      expect(() => builder.build(), isNot(throwsException));
     });
 
     test('Builder should set end time correctly', () {
@@ -133,25 +106,20 @@ void main() {
         ..setEndTime(endTime)
         ..setOnEvent(() {});
 
-      expect(
-        () => builder.build(),
-        isNot(throwsException),
-      );
+      expect(() => builder.build(), isNot(throwsException));
     });
 
     test('Builder should support method chaining', () async {
-      final builder = EventSchedulerBuilder()
-        ..setEventKey(testEventKey)
-        ..setTriggerType(TriggerType.time)
-        ..setRecurrenceType(RecurrenceType.time)
-        ..setTriggerTime(DateTime.now())
-        ..setRecurrenceInterval(const Duration(minutes: 5))
-        ..setOnEvent(() {});
+      final builder =
+          EventSchedulerBuilder()
+            ..setEventKey(testEventKey)
+            ..setTriggerType(TriggerType.time)
+            ..setRecurrenceType(RecurrenceType.time)
+            ..setTriggerTime(DateTime.now())
+            ..setRecurrenceInterval(const Duration(minutes: 5))
+            ..setOnEvent(() {});
 
-      expect(
-        () => builder.build(),
-        isNot(throwsException),
-      );
+      expect(() => builder.build(), isNot(throwsException));
     });
 
     test('Builder should create valid SchedulerConfig', () async {
@@ -171,10 +139,7 @@ void main() {
         ..setRecurrenceOnEvent(recurrenceOnEvent)
         ..setOnStateUpdate(onStateUpdate);
 
-      expect(
-        () => builder.build(),
-        isNot(throwsException),
-      );
+      expect(() => builder.build(), isNot(throwsException));
     });
   });
 }
