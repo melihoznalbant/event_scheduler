@@ -24,3 +24,7 @@
 * Added example applications
 * Added unit tests
 * Added MIT license
+
+## [0.0.2] - 2025-06-10
+
+* library-level doc comment is now valid
