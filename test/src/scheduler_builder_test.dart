@@ -1,4 +1,4 @@
-import 'package:event_scheduler/event_scheduler_flutter.dart';
+import 'package:event_scheduler/event_scheduler.dart';
 import 'package:event_scheduler/src/scheduler_builder.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
